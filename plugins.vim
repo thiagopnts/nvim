@@ -24,9 +24,10 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
+"Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 "Plug 'SirVer/ultisnips'
 "Plug 'honza/vim-snippets'
-Plug 'rking/ag.vim', { 'on': 'Ag' }
+Plug 'mileszs/ack.vim'
 Plug 'Townk/vim-autoclose'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'nathanaelkane/vim-indent-guides'
@@ -43,6 +44,7 @@ Plug 'bling/vim-airline'
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoUpdateBinaries' }
 Plug 'vim-airline/vim-airline-themes'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'mattn/emmet-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'xolox/vim-misc'
