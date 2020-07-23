@@ -12,9 +12,12 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'tell-k/vim-autopep8'
 Plug 'tpope/vim-fugitive'
+Plug 'baskerville/bubblegum'
 Plug 'c9s/vikube.vim'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neomake/neomake', {'for': 'python'}
+Plug 'aurieh/discord.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ClockworkNet/vim-vcl'
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'tpope/vim-surround'
