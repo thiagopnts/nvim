@@ -1,4 +1,7 @@
-
+" After installing, run
+" CocInstall coc-json coc-tsserver coc-python coc-prettier coc-snippets
+" coc-html coc-css
+"
 
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
@@ -44,6 +47,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> c-] <Plug>(coc-definition)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>

@@ -28,7 +28,7 @@ Plug 'tomtom/tlib_vim'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 "Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-"Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 "Plug 'honza/vim-snippets'
 Plug 'mileszs/ack.vim'
 Plug 'Townk/vim-autoclose'

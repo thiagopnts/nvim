@@ -6,8 +6,14 @@
       "filetypes": ["go"]
     }
   },
-  "snippets.ultisnips.directories": [
-    "UltiSnips",
-    "gosnippets/UltiSnips"
+  "snippets.ultisnips.directories": ["UltiSnips", "gosnippets/UltiSnips"],
+  "python.formatting.provider": "black",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "go",
+    "markdown",
+    "javascript",
+    "typescript",
+    "json",
+    "jsonc"
   ]
 }
