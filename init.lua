@@ -17,4 +17,4 @@ require 'plugins.go'
 require 'plugins.rust'
 require 'plugins.gitsigns'
 
-vim.api.nvim_command('colorscheme tokyonight')
+vim.api.nvim_command('colorscheme jellybeans')
