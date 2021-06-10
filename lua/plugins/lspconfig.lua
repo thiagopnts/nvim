@@ -1,5 +1,8 @@
-require 'lspconfig'.gopls.setup{} -- golang, you need to have gopls in your PATH
-require 'lspconfig'.sumneko_lua.setup{ -- lua, you need to have lua-language-server in your path
+require 'lspconfig'.gopls.setup({}) -- golang, you need to have gopls in your PATH
+require'lsp_signature'.on_attach() -- from ray-x/lsp_signature.nvim, enables signature help pop up
+
+require 'lspconfig'.rust_analyzer.setup({}) -- rust, need 
+require 'lspconfig'.sumneko_lua.setup({ -- lua, you need to have lua-language-server in your path
 	cmd = { "lua-language-server" },
 	settings = {
 		Lua = {
@@ -18,5 +21,4 @@ require 'lspconfig'.sumneko_lua.setup{ -- lua, you need to have lua-language-ser
 			},
 		},
 	},
-}
-
+})
