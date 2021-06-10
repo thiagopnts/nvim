@@ -6,6 +6,7 @@ require 'mappings'
 require 'paq'
 
 require 'plugins.tokyonight'
+require 'plugins.tree-sitter'
 require 'plugins.pears'
 require 'plugins.lspconfig'
 require 'plugins.CamelCaseMotion'
