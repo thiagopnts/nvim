@@ -41,6 +41,7 @@ local on_attach = function(client, bufnr)
   local opts = { noremap=true, silent=true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
+  -- TODO: use the new commands we defined above instead of the full call
   buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap(bufnr, 'n', '<C-]>', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -131,7 +132,7 @@ local sumneko_root_path = '/Users/' .. user .. '/src/lua-language-server'
 local sumneko_binary = sumneko_root_path .. '/bin/macOS/lua-language-server'
 local cmd = { "lua-language-server" }
 -- for some reason on macos you need this whole fucking thing for this to work
-if vim.fn.has('mac') then cmd = { sumneko_binary, '-E', sumneko_root_path .. '/main.lua' } end
+if vim.fn.has('mac') == 1 then cmd = { sumneko_binary, '-E', sumneko_root_path .. '/main.lua' } end
 
 require 'lspconfig'.sumneko_lua.setup({ -- lua, you need to have lua-language-server in your path
   capabilities = capabilities,
