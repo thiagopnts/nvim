@@ -117,6 +117,8 @@ require('lspconfig').tsserver.setup({
   end,
 })
 
+require('lspconfig').pyls.setup({})
+
 require 'lspconfig'.gopls.setup({
   on_attach = on_attach,
   capabilities = capabilities,
