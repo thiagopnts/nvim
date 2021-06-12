@@ -1,1 +1,1 @@
-require('go').setup({ linter = 'golint' })
+require("go").setup({linter = "golint"})
