@@ -20,7 +20,7 @@ require "paq-nvim" {
   "crispgm/nvim-go", -- vim-go like
   "rust-lang/rust.vim", -- rust lang support
   "lewis6991/gitsigns.nvim", -- git.... signs
-  "rktjmp/lush.nvim",
+  "romgrk/barbar.nvim",
   "ray-x/lsp_signature.nvim",
   "mhartington/formatter.nvim",
   "folke/lsp-colors.nvim", -- might not be needed, remember to delete
@@ -30,6 +30,7 @@ require "paq-nvim" {
   "kyazdani42/nvim-tree.lua",
   "christoomey/vim-tmux-navigator",
   -- colorschemes
+  "rktjmp/lush.nvim",
   "ray-x/aurora",
   "yonlu/omni.vim",
   "jacoborus/tender.vim",

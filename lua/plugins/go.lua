@@ -1,1 +1,6 @@
-require("go").setup({linter = "golint"})
+require("go").setup(
+  {
+    linter = "golint",
+    auto_lint = false
+  }
+)
