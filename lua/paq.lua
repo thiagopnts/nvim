@@ -16,15 +16,16 @@ require "paq-nvim" {
   "nvim-lua/plenary.nvim", -- telescope/gitsigns dependency
   "nvim-telescope/telescope.nvim", -- better fzf so they say
   "steelsojka/pears.nvim", -- auto close pairs
-  "ojroques/nvim-hardline", -- like airline
+  "glepnir/galaxyline.nvim", -- status line
   "crispgm/nvim-go", -- vim-go like
   "rust-lang/rust.vim", -- rust lang support
   "lewis6991/gitsigns.nvim", -- git.... signs
-  "romgrk/barbar.nvim",
   "ray-x/lsp_signature.nvim",
   "mhartington/formatter.nvim",
+  "akinsho/nvim-bufferline.lua", -- top tabs bar
   "folke/lsp-colors.nvim", -- might not be needed, remember to delete
   "axelf4/vim-strip-trailing-whitespace", -- remove trailing whitespace
+  {"lukas-reineke/indent-blankline.nvim", branch = "lua"},
   -- FIXME these 2 are not working properly might be worth removing
   "kyazdani42/nvim-web-devicons", -- for file icons
   "kyazdani42/nvim-tree.lua",
@@ -36,5 +37,7 @@ require "paq-nvim" {
   "jacoborus/tender.vim",
   "folke/tokyonight.nvim",
   "nanotech/jellybeans.vim", -- best colorscheme :)
-  "adisen99/jellybeans-nvim"
+  "adisen99/jellybeans-nvim",
+  "siduck76/nvim-base16.lua",
+  "norcalli/nvim-colorizer.lua"
 }
