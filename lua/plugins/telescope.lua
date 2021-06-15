@@ -61,3 +61,6 @@ require("telescope").setup(
 --require("telescope").load_extension("media_files")
 
 set_keymap("n", "<c-p>", "<cmd>Telescope find_files<cr>")
+set_keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
+set_keymap("n", "<leader>b", "<cmd>Telescope buffers<cr>")
+set_keymap("n", "<leader>ag", "<cmd>Telescope live_grep<cr>")
