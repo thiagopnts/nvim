@@ -15,6 +15,7 @@ require "plugins.rust"
 require "plugins.gitsigns"
 require "plugins.formatter"
 require "plugins.galaxyline"
+
 require "plugins.nvim-tree"
 require "plugins.bufferline"
 

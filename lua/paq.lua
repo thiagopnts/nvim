@@ -28,6 +28,7 @@ require "paq-nvim" {
   "akinsho/nvim-bufferline.lua", -- top tabs bar
   "folke/lsp-colors.nvim", -- might not be needed, remember to delete
   "tweekmonster/startuptime.vim",
+  "liuchengxu/vista.vim",
   "axelf4/vim-strip-trailing-whitespace", -- remove trailing whitespace
   {"lukas-reineke/indent-blankline.nvim", branch = "lua"},
   -- FIXME these 2 are not working properly might be worth removing
