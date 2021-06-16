@@ -1,4 +1,4 @@
-vim.cmd "packadd paq-nvim" -- load paq package manager
+vim.cmd("packadd paq-nvim") -- load paq package manager
 
 require "paq-nvim" {
   "savq/paq-nvim", -- package manager
