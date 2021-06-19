@@ -1,23 +1,23 @@
-require "opts"
+require("opts")
 
-require "mappings"
+require("mappings")
 
-require "paq"
+require("paq")
 
 --require 'plugins.tokyonight'
-require "plugins.tree-sitter"
-require "plugins.lspconfig"
-require "plugins.CamelCaseMotion"
-require "plugins.compe"
-require "plugins.telescope"
-require "plugins.go"
-require "plugins.rust"
-require "plugins.gitsigns"
-require "plugins.formatter"
-require "plugins.galaxyline"
+require("plugins.tree-sitter")
+require("plugins.lspconfig")
+require("plugins.CamelCaseMotion")
+require("plugins.compe")
+require("plugins.telescope")
+require("plugins.go")
+require("plugins.rust")
+require("plugins.gitsigns")
+require("plugins.formatter")
+require("plugins.galaxyline")
 
-require "plugins.nvim-tree"
-require "plugins.bufferline"
+require("plugins.nvim-tree")
+require("plugins.bufferline")
 
 local base16 = require("base16")
 base16(base16.themes["onedark"], true)
@@ -49,9 +49,9 @@ g.indent_blankline_buftype_exclude = {"terminal"}
 g.indent_blankline_show_trailing_blankline_indent = false
 g.indent_blankline_show_first_indent_level = false
 
-local colors = require "themes/onedark"
+local colors = require("themes/onedark")
 
-require "nvim-web-devicons".setup {
+require("nvim-web-devicons").setup {
   override = {
     html = {
       icon = "",
