@@ -22,6 +22,12 @@ require "plugins.bufferline"
 local base16 = require("base16")
 base16(base16.themes["onedark"], true)
 
+require("presence"):setup(
+  {
+    editing_text = "Coding %s"
+  }
+)
+
 require("colorizer").setup()
 require("nvim-autopairs").setup()
 require("lspkind").init()

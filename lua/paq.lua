@@ -25,7 +25,9 @@ require "paq-nvim" {
   "lewis6991/gitsigns.nvim", -- git.... signs
   "ray-x/lsp_signature.nvim",
   "mhartington/formatter.nvim",
+  "cespare/vim-toml", -- toml syntax highlight
   "akinsho/nvim-bufferline.lua", -- top tabs bar
+  "andweeb/presence.nvim", -- discord presence
   "folke/lsp-colors.nvim", -- might not be needed, remember to delete
   "tweekmonster/startuptime.vim",
   "liuchengxu/vista.vim",
