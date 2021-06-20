@@ -10,3 +10,5 @@ vim.api.nvim_set_keymap("n", "<Leader>rr", [[<Cmd> luafile %<CR>]], {noremap = t
 
 -- open/close nvim tree
 vim.api.nvim_set_keymap("n", "<Leader>k", [[<Cmd> NvimTreeToggle<CR>]], {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<Leader>[", [[<Cmd> bn<CR>]], {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<Leader>]", [[<Cmd> bn<CR>]], {noremap = true, silent = true})
