@@ -17,6 +17,7 @@ require("paq-nvim")(
     "nvim-lua/popup.nvim", -- telescope dependency
     "nvim-lua/plenary.nvim", -- telescope/gitsigns dependency
     "onsails/lspkind-nvim",
+    "LnL7/vim-nix", -- nix syntax support
     "nvim-telescope/telescope.nvim", -- better fzf so they say
     --  "steelsojka/pears.nvim",
     "windwp/nvim-autopairs", -- auto close pairs
