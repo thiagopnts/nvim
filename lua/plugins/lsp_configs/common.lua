@@ -2,14 +2,13 @@ local buf_set_keymap = require("util").nvim_buf_set_keymap
 
 local on_attach = function(client, bufnr)
   -- from ray-x/lsp_signature.nvim, enables signature help pop up
-  require("lsp_signature").on_attach(
-    {
-      bind = true,
-      handler_opts = {
-        border = "single"
-      }
+  require("lsp_signature").on_attach {
+    bind = true,
+    hint_enable = false,
+    handler_opts = {
+      border = "single"
     }
-  )
+  }
 
   --Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")

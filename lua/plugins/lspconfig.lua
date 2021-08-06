@@ -28,6 +28,5 @@ local lsps = {
 
 for _, lang_server in pairs(lsps) do
   local config = require("plugins.lsp_configs." .. lang_server)
-  print("loading " .. lang_server)
   lspconfig[lang_server].setup(config)
 end
