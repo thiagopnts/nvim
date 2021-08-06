@@ -5,6 +5,7 @@ require("paq-nvim")(
     "savq/paq-nvim", -- package manager
     {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}, -- parser generator tool for better syntax highlight
     "nvim-treesitter/playground", -- useful for checking the diff between treesitter vs no treesitter
+    "nvim-treesitter/nvim-treesitter-textobjects",
     "glepnir/dashboard-nvim",
     "neovim/nvim-lspconfig", -- client for language servers
     "bkad/CamelCaseMotion", -- can jump between camel|snakecase words
@@ -38,6 +39,7 @@ require("paq-nvim")(
     -- FIXME these 2 are not working properly might be worth removing
     "kyazdani42/nvim-web-devicons", -- for file icons
     "kyazdani42/nvim-tree.lua",
+    "tpope/vim-fugitive",
     "christoomey/vim-tmux-navigator",
     -- colorschemes
     "rktjmp/lush.nvim",

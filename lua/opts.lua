@@ -25,3 +25,4 @@ opt.termguicolors = true
 opt.completeopt = "menuone,noinsert,noselect"
 opt.ignorecase = true
 opt.scrolloff = 999 -- keep cursor centered
+opt.hlsearch = false

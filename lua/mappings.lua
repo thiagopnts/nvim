@@ -16,7 +16,7 @@ vim.api.nvim_set_keymap("n", "J", "mzJ`z", {noremap = true, silent = true})
 -- undo break points
 vim.api.nvim_set_keymap("i", ",", [[,<c-g>u]], {noremap = true, silent = true})
 vim.api.nvim_set_keymap("i", ".", [[.<c-g>u]], {noremap = true, silent = true})
-vim.api.nvim_set_keymap("i", "::", [[.<c-g>u]], {noremap = true, silent = true})
+--vim.api.nvim_set_keymap("i", "::", [[.<c-g>u]], {noremap = true, silent = true})
 vim.api.nvim_set_keymap("i", "_", [[.<c-g>u]], {noremap = true, silent = true})
 
 -- open/close nvim tree
