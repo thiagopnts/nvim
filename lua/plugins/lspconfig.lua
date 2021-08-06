@@ -18,13 +18,16 @@ vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
 local lsps = {
   "diagnosticls",
   "sumneko_lua",
-  "pyls",
+  "pylsp",
   "gopls",
   "rust_analyzer",
-  "tsserver"
+  "tsserver",
+  "rnix",
+  "phpactor"
 }
 
 for _, lang_server in pairs(lsps) do
   local config = require("plugins.lsp_configs." .. lang_server)
+  print("loading " .. lang_server)
   lspconfig[lang_server].setup(config)
 end

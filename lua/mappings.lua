@@ -29,7 +29,9 @@ vim.api.nvim_set_keymap("n", "Y", "y$", {noremap = true, silent = true})
 -- text move support
 vim.api.nvim_set_keymap("v", "J", ":m '>+1<CR>gv=gv", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("v", "K", ":m '<-2<CR>gv=gv", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<Leader>j", ":m .+1<CR>==", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<Leader>k", ":m .-2<CR>==", {noremap = true, silent = true})
+--vim.api.nvim_set_keymap("n", "<Leader>j", ":m .+1<CR>==", {noremap = true, silent = true})
+-- leader-k conflicts with nvimtreetoggle and usually I prefer using text move support on
+-- visual mode.
+--vim.api.nvim_set_keymap("n", "<Leader>k", ":m .-2<CR>==", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("i", "<C-j>", "<esc>:m .+1<CR>==i", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("i", "<C-k>", "<esc>:m .-2<CR>==i", {noremap = true, silent = true})
