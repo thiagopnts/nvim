@@ -1,5 +1,3 @@
-vim.o.completeopt = "menuone,noselect"
-
 require("compe").setup {
   enabled = true,
   autocomplete = true,
@@ -28,13 +26,6 @@ require("compe").setup {
     --    snippets_nvim = true,
     --    treesitter = true
   }
-}
-
-local vim = vim
-local opts = {
-  noremap = true,
-  silent = true,
-  expr = true
 }
 
 --vim.api.nvim_set_keymap('i', '<cr>', "compe#confirm('<CR>')", opts)

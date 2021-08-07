@@ -1,290 +1,276 @@
-require("opts")
+-- initialize and setup plugin manager
+local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  vim.fn.execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
+end
+vim.api.nvim_exec(
+  [[
+  augroup Packer
+    autocmd!
+    autocmd BufWritePost init.lua PackerCompile
+  augroup end
+]],
+  false
+)
 
+-- prepare to define plugins
+local use = require("packer").use
+require("packer").startup(
+  function()
+    -- Package manager itself
+    use "wbthomason/packer.nvim"
+    use "folke/lsp-colors.nvim"
+    use "ray-x/lsp_signature.nvim"
+    use "mhartington/formatter.nvim"
+    use "cespare/vim-toml" -- toml syntax highlight
+    -- remove trailing whitespace
+    use "axelf4/vim-strip-trailing-whitespace"
+    -- for file icons
+    use "kyazdani42/nvim-web-devicons"
+    use "tpope/vim-fugitive"
+    use "christoomey/vim-tmux-navigator"
+    use "nvim-treesitter/nvim-treesitter-textobjects"
+    -- jellybeans colorscheme and its dependency lush
+    use "rktjmp/lush.nvim"
+    use "adisen99/jellybeans-nvim"
+    -- repeat unrepeatable commands
+    use "tpope/vim-repeat"
+    -- classic surround plugin
+    use "tpope/vim-surround"
+    -- auto completion plugin
+    use "hrsh7th/nvim-compe"
+    -- snippets
+    use "hrsh7th/vim-vsnip"
+    -- vsnip integration for nvim-compe
+    use "hrsh7th/vim-vsnip-integ"
+    -- nix syntax support
+    use "LnL7/vim-nix"
+    -- status line
+    use "glepnir/galaxyline.nvim"
+    -- fancy & powerful grep lib
+    -- Highlight, edit, and navigate code using a fast incremental parsing library
+    use {
+      "nvim-treesitter/nvim-treesitter",
+      run = ":TSUpdate",
+      config = function()
+        require "nvim-treesitter.configs".setup {highlight = {enable = true}}
+      end
+    }
+    -- client for language servers
+    use "neovim/nvim-lspconfig"
+    -- can jump between camel|snakecase words
+    use {
+      "bkad/CamelCaseMotion",
+      config = function()
+        vim.g.camelcasemotion_key = ","
+      end
+    }
+    use {
+      "onsails/lspkind-nvim",
+      config = function()
+        require("lspkind").init()
+      end
+    }
+    -- auto close pairs
+    use {
+      "windwp/nvim-autopairs",
+      config = function()
+        require "nvim-autopairs".setup {}
+      end
+    }
+    -- vim-go like
+    use {
+      "crispgm/nvim-go",
+      config = function()
+        require "go".setup {auto_lint = false}
+      end
+    }
+    -- rust lang support
+    use {
+      "rust-lang/rust.vim",
+      config = function()
+        vim.g.rustfmt_autosave = 1
+      end
+    }
+    -- git.... signs
+    use {
+      "lewis6991/gitsigns.nvim",
+      config = function()
+        require "gitsigns".setup {
+          signs = {
+            add = {hl = "DiffAdd", text = "▌", numhl = "GitSignsAddNr"},
+            change = {hl = "DiffChange", text = "▌", numhl = "GitSignsChangeNr"},
+            delete = {hl = "DiffDelete", text = "_", numhl = "GitSignsDeleteNr"},
+            topdelete = {hl = "DiffDelete", text = "‾", numhl = "GitSignsDeleteNr"},
+            changedelete = {hl = "DiffChange", text = "~", numhl = "GitSignsChangeNr"}
+          },
+          numhl = false,
+          keymaps = {
+            -- Default keymap options
+            noremap = true,
+            buffer = true,
+            ["n ]c"] = {expr = true, '&diff ? \']c\' : \'<cmd>lua require"gitsigns".next_hunk()<CR>\''},
+            ["n [c"] = {expr = true, '&diff ? \'[c\' : \'<cmd>lua require"gitsigns".prev_hunk()<CR>\''},
+            ["n <leader>hs"] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+            ["n <leader>hu"] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+            ["n <leader>hr"] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+            ["n <leader>hp"] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+            ["n <leader>hb"] = '<cmd>lua require"gitsigns".blame_line()<CR>'
+          },
+          watch_index = {
+            interval = 100
+          },
+          sign_priority = 5,
+          status_formatter = nil -- Use default
+        }
+      end
+    }
+    -- top tabs bar
+    use {
+      "akinsho/nvim-bufferline.lua",
+      config = function()
+        require "bufferline".setup {
+          options = {
+            offsets = {{filetype = "NvimTree", text = "", padding = 1}},
+            buffer_close_icon = "",
+            modified_icon = "",
+            close_icon = "",
+            left_trunc_marker = "",
+            right_trunc_marker = "",
+            max_name_length = 14,
+            max_prefix_length = 13,
+            tab_size = 20,
+            show_tab_indicators = true,
+            enforce_regular_tabs = false,
+            view = "multiwindow",
+            show_buffer_close_icons = true,
+            separator_style = "thin",
+            mappings = "true"
+          }
+        }
+      end
+    }
+    use {
+      "andweeb/presence.nvim",
+      config = function()
+        require("presence"):setup {
+          editing_text = "Coding %s"
+        }
+      end
+    }
+    use {
+      "lukas-reineke/indent-blankline.nvim",
+      config = function()
+        vim.g.indentLine_enabled = 1
+        vim.g.indent_blankline_char = "▏"
+        vim.g.indent_blankline_filetype_exclude = {"help", "terminal", "dashboard"}
+        vim.g.indent_blankline_buftype_exclude = {"terminal"}
+        vim.g.indent_blankline_show_trailing_blankline_indent = false
+        vim.g.indent_blankline_show_first_indent_level = false
+      end
+    }
+    use {
+      "kyazdani42/nvim-tree.lua",
+      config = function()
+        vim.g.nvim_tree_side = "left"
+        vim.g.nvim_tree_width = 25
+        vim.g.nvim_tree_ignore = {".git", "node_modules", ".cache"}
+        vim.g.nvim_tree_auto_open = 0
+        vim.g.nvim_tree_auto_close = 0
+        vim.g.nvim_tree_quit_on_open = 0
+        vim.g.nvim_tree_follow = 1
+        vim.g.nvim_tree_indent_markers = 1
+        vim.g.nvim_tree_hide_dotfiles = 1
+        vim.g.nvim_tree_git_hl = 1
+        vim.g.nvim_tree_root_folder_modifier = ":t"
+        vim.g.nvim_tree_tab_open = 0
+        vim.g.nvim_tree_allow_resize = 1
+        vim.g.nvim_tree_show_icons = {
+          git = 1,
+          folders = 1,
+          files = 1
+        }
+        vim.g.nvim_tree_icons = {
+          default = " ",
+          symlink = " ",
+          git = {
+            unstaged = "✗",
+            staged = "✓",
+            unmerged = "",
+            renamed = "➜",
+            untracked = "★",
+            deleted = "",
+            ignored = "◌"
+          },
+          folder = {
+            default = "",
+            open = "",
+            symlink = "",
+            empty = "",
+            empty_open = "",
+            symlink_open = ""
+          }
+        }
+      end
+    }
+    use {
+      "nvim-telescope/telescope.nvim",
+      requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}},
+      config = function()
+        require "telescope".setup {
+          defaults = {
+            vimgrep_arguments = {
+              "rg",
+              "--color=never",
+              "--no-heading",
+              "--with-filename",
+              "--line-number",
+              "--column",
+              "--smart-case"
+            },
+            prompt_prefix = "> ",
+            selection_caret = "> ",
+            entry_prefix = "  ",
+            initial_mode = "insert",
+            selection_strategy = "reset",
+            sorting_strategy = "descending",
+            layout_strategy = "horizontal",
+            layout_config = {
+              horizontal = {
+                mirror = false
+              },
+              vertical = {
+                mirror = false
+              }
+            },
+            file_sorter = require "telescope.sorters".get_fuzzy_file,
+            file_ignore_patterns = {},
+            generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,
+            winblend = 0,
+            border = {},
+            borderchars = {"─", "│", "─", "│", "╭", "╮", "╯", "╰"},
+            color_devicons = true,
+            use_less = true,
+            path_display = {},
+            set_env = {["COLORTERM"] = "truecolor"}, -- default = nil,
+            file_previewer = require "telescope.previewers".vim_buffer_cat.new,
+            grep_previewer = require "telescope.previewers".vim_buffer_vimgrep.new,
+            qflist_previewer = require "telescope.previewers".vim_buffer_qflist.new,
+            -- Developer configurations: Not meant for general override
+            buffer_previewer_maker = require "telescope.previewers".buffer_previewer_maker
+          }
+        }
+      end
+    }
+  end
+)
+vim.api.nvim_command("colorscheme jellybeans-nvim")
+
+require("opts")
 require("mappings")
 
-require("paq")
-
---require 'plugins.tokyonight'
-require("plugins.tree-sitter")
-require("plugins.lspconfig")
-require("plugins.CamelCaseMotion")
-require("plugins.compe")
-require("plugins.telescope")
-require("plugins.go")
-require("plugins.rust")
-require("plugins.gitsigns")
-require("plugins.formatter")
-require("plugins.galaxyline")
-require("plugins.dashboard-nvim")
-
-require("plugins.nvim-tree")
-require("plugins.bufferline")
-require("plugins.indent-blankline")
-
-local base16 = require("base16")
-base16(base16.themes["onedark"], true)
-
-require("presence"):setup {
-  editing_text = "Coding %s"
-}
-
-require("colorizer").setup()
-require("nvim-autopairs").setup()
-require("lspkind").init()
---  {
---    preset = "codicons"
---  }
---)
-
---vim.api.nvim_command("colorscheme jellybeans-nvim")
-
-local colors = require("themes/onedark")
-
-require("nvim-web-devicons").setup {
-  override = {
-    html = {
-      icon = "",
-      color = colors.baby_pink,
-      name = "html"
-    },
-    css = {
-      icon = "",
-      color = colors.blue,
-      name = "css"
-    },
-    js = {
-      icon = "",
-      color = colors.sun,
-      name = "js"
-    },
-    ts = {
-      icon = "ﯤ",
-      color = colors.teal,
-      name = "ts"
-    },
-    kt = {
-      icon = "󱈙",
-      color = colors.orange,
-      name = "kt"
-    },
-    png = {
-      icon = "",
-      color = colors.dark_purple,
-      name = "png"
-    },
-    jpg = {
-      icon = "",
-      color = colors.dark_purple,
-      name = "jpg"
-    },
-    jpeg = {
-      icon = "",
-      color = "colors.dark_purple",
-      name = "jpeg"
-    },
-    mp3 = {
-      icon = "",
-      color = colors.white,
-      name = "mp3"
-    },
-    mp4 = {
-      icon = "",
-      color = colors.white,
-      name = "mp4"
-    },
-    out = {
-      icon = "",
-      color = colors.white,
-      name = "out"
-    },
-    Dockerfile = {
-      icon = "",
-      color = colors.cyan,
-      name = "Dockerfile"
-    },
-    rb = {
-      icon = "",
-      color = colors.pink,
-      name = "rb"
-    },
-    vue = {
-      icon = "﵂",
-      color = colors.vibrant_green,
-      name = "vue"
-    },
-    py = {
-      icon = "",
-      color = colors.cyan,
-      name = "py"
-    },
-    toml = {
-      icon = "",
-      color = colors.blue,
-      name = "toml"
-    },
-    lock = {
-      icon = "",
-      color = colors.red,
-      name = "lock"
-    },
-    zip = {
-      icon = "",
-      color = colors.sun,
-      name = "zip"
-    },
-    xz = {
-      icon = "",
-      color = colors.sun,
-      name = "xz"
-    },
-    deb = {
-      icon = "",
-      color = colors.cyan,
-      name = "deb"
-    },
-    rpm = {
-      icon = "",
-      color = colors.orange,
-      name = "rpm"
-    }
-  }
-}
-
--- add this again once we move this back to its own file
---local colors = require "themes/onedark"
-
-local white = colors.white
-local darker_black = colors.darker_black
-local black = colors.black
-local black2 = colors.black2
-local one_bg = colors.one_bg
-local one_bg2 = colors.one_bg2
-local one_bg3 = colors.one_bg3
-local light_grey = colors.light_grey
-local grey = colors.grey
-local grey_fg = colors.grey_fg
-local red = colors.red
-local line = colors.line
-local green = colors.green
-local nord_blue = colors.nord_blue
-local blue = colors.blue
-local yellow = colors.yellow
-local purple = colors.purple
-
--- highlights
-local cmd = vim.cmd
--- for guifg , bg
-
-local function fg(group, color)
-  cmd("hi " .. group .. " guifg=" .. color)
-end
-
-local function bg(group, color)
-  cmd("hi " .. group .. " guibg=" .. color)
-end
-
-local function fg_bg(group, fgcol, bgcol)
-  cmd("hi " .. group .. " guifg=" .. fgcol .. " guibg=" .. bgcol)
-end
-
--- blankline
-
-fg("IndentBlanklineChar", line)
-
--- misc --
-fg("LineNr", grey)
-fg("Comment", grey)
-fg("NvimInternalError", red)
-fg("VertSplit", line)
-fg("EndOfBuffer", black)
-
--- Pmenu
-bg("Pmenu", one_bg)
-bg("PmenuSbar", one_bg2)
-bg("PmenuSel", green)
-bg("PmenuThumb", nord_blue)
-
--- inactive statuslines as thin splitlines
-cmd("hi! StatusLineNC gui=underline guifg=" .. line)
-
--- line n.o
-cmd "hi clear CursorLine"
-fg("cursorlinenr", white)
-
--- git signs ---
-fg_bg("DiffAdd", green, "none")
-fg_bg("DiffChange", green, "none")
-fg_bg("DiffModified", green, "none")
-
--- NvimTree
-fg("NvimTreeFolderIcon", blue)
-fg("NvimTreeFolderName", blue)
-fg("NvimTreeIndentMarker", one_bg2)
-fg("NvimTreeVertSplit", darker_black)
-bg("NvimTreeVertSplit", darker_black)
-
-fg("NvimTreeRootFolder", darker_black)
-bg("NvimTreeNormal", darker_black)
-fg_bg("NvimTreeStatuslineNc", darker_black, darker_black)
-
--- telescope
-fg("TelescopeBorder", line)
-fg("TelescopePromptBorder", line)
-fg("TelescopeResultsBorder", line)
-fg("TelescopePreviewBorder", grey)
-
--- LspDiagnostics ---
-
--- error / warnings
-fg("LspDiagnosticsSignError", red)
-fg("LspDiagnosticsVirtualTextError", red)
-fg("LspDiagnosticsSignWarning", yellow)
-fg("LspDiagnosticsVirtualTextWarning", yellow)
-
--- info
-fg("LspDiagnosticsSignInformation", green)
-fg("LspDiagnosticsVirtualTextInformation", green)
-
--- hint
-fg("LspDiagnosticsSignHint", purple)
-fg("LspDiagnosticsVirtualTextHint", purple)
-
--- bufferline
-
-fg_bg("BufferLineFill", grey_fg, black2)
-fg_bg("BufferLineBackground", light_grey, black2)
-
-fg_bg("BufferLineBufferVisible", light_grey, black2)
-fg_bg("BufferLineBufferSelected", white, black)
-
-cmd "hi BufferLineBufferSelected gui=bold"
-
--- tabs
-fg_bg("BufferLineTab", light_grey, one_bg3)
-fg_bg("BufferLineTabSelected", black2, nord_blue)
-fg_bg("BufferLineTabClose", red, black)
-
-fg_bg("BufferLineIndicator", black2, black2)
-fg_bg("BufferLineIndicatorSelected", black, black)
-
--- separators
-fg_bg("BufferLineSeparator", line, black2)
-fg_bg("BufferLineSeparatorVisible", line, black2)
-fg_bg("BufferLineSeparatorSelected", black, black2)
-
--- modified buffers
-fg_bg("BufferLineModified", red, black2)
-fg_bg("BufferLineModifiedVisible", red, black2)
-fg_bg("BufferLineModifiedSelected", green, black)
-
--- close buttons
-fg_bg("BufferLineCLoseButtonVisible", light_grey, black2)
-fg_bg("BufferLineCLoseButton", light_grey, black2)
-fg_bg("BufferLineCLoseButtonSelected", red, black)
-
--- dashboard
-
-fg("DashboardHeader", grey_fg)
-fg("DashboardCenter", grey_fg)
-fg("DashboardShortcut", grey_fg)
-fg("DashboardFooter", black)
+require("_lspconfig")
+require("_galaxyline")
+require("_compe")
+require("_formatter")
+require("_dashboard")

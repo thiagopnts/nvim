@@ -14,10 +14,7 @@ vim.api.nvim_set_keymap("n", "N", "Nzzzv", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "J", "mzJ`z", {noremap = true, silent = true})
 
 -- undo break points
-vim.api.nvim_set_keymap("i", ",", [[,<c-g>u]], {noremap = true, silent = true})
 vim.api.nvim_set_keymap("i", ".", [[.<c-g>u]], {noremap = true, silent = true})
---vim.api.nvim_set_keymap("i", "::", [[.<c-g>u]], {noremap = true, silent = true})
-vim.api.nvim_set_keymap("i", "_", [[.<c-g>u]], {noremap = true, silent = true})
 
 -- open/close nvim tree
 vim.api.nvim_set_keymap("n", "<Leader>k", [[<Cmd> NvimTreeToggle<CR>]], {noremap = true, silent = true})
@@ -29,9 +26,11 @@ vim.api.nvim_set_keymap("n", "Y", "y$", {noremap = true, silent = true})
 -- text move support
 vim.api.nvim_set_keymap("v", "J", ":m '>+1<CR>gv=gv", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("v", "K", ":m '<-2<CR>gv=gv", {noremap = true, silent = true})
---vim.api.nvim_set_keymap("n", "<Leader>j", ":m .+1<CR>==", {noremap = true, silent = true})
--- leader-k conflicts with nvimtreetoggle and usually I prefer using text move support on
--- visual mode.
---vim.api.nvim_set_keymap("n", "<Leader>k", ":m .-2<CR>==", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("i", "<C-j>", "<esc>:m .+1<CR>==i", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("i", "<C-k>", "<esc>:m .-2<CR>==i", {noremap = true, silent = true})
+
+
+-- telescope mappings
+vim.api.nvim_set_keymap("n", "<Leader>ff", "<cmd>Telescope find_files<cr>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<Leader>b", ":Telescope buffers<cr>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<Leader>ag", ":Telescope live_grep<cr>", {noremap = true, silent = true})
