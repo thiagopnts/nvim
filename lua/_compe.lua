@@ -3,7 +3,7 @@ require("compe").setup {
   autocomplete = true,
   debug = false,
   min_length = 1,
-  preselect = "enable",
+  preselect = false,
   throttle_time = 80,
   source_timeout = 200,
   incomplete_delay = 400,
@@ -14,7 +14,7 @@ require("compe").setup {
   source = {
     buffer = {kind = "﬘", true},
     vsnip = {kind = "﬌"}, --replace to what sign you prefer
-    nvim_lsp = true
+    nvim_lsp = true,
     --    path = true,
     --    buffer = true,
     --    calc = true,
@@ -24,7 +24,7 @@ require("compe").setup {
     --    spell = true,
     --    tags = true,
     --    snippets_nvim = true,
-    --    treesitter = true
+    treesitter = true
   }
 }
 
@@ -103,4 +103,4 @@ function _G.completions()
   return npairs.check_break_line_char()
 end
 
-vim.api.nvim_set_keymap("i", "<CR>", "v:lua.completions()", {expr = true})
+--vim.api.nvim_set_keymap("i", "<CR>", "v:lua.completions()", {expr = true})

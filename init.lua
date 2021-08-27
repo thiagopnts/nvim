@@ -264,7 +264,7 @@ require("packer").startup(
     }
   end
 )
-vim.api.nvim_command("colorscheme jellybeans-nvim")
+vim.api.nvim_command("colorscheme jellybeans")
 
 require("opts")
 require("mappings")
