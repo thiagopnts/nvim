@@ -297,11 +297,9 @@ saga.init_lsp_saga {
   hint_sign = '⬤',
   infor_sign = '⬤',
   rename_prompt_prefix = '',
-
 }
 
 require("opts")
 require("_mappings")
 require("_lspconfig")
---require("_galaxyline")
 require("_formatter")
