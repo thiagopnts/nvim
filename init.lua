@@ -28,8 +28,9 @@ require("packer").startup(
     use "christoomey/vim-tmux-navigator"
     use "nvim-treesitter/nvim-treesitter-textobjects"
     -- jellybeans colorscheme and its dependency lush
-    use "rktjmp/lush.nvim"
     use "adisen99/jellybeans-nvim"
+    use "rktjmp/lush.nvim"
+    use "~/src/jellybeans"
     use "tpope/vim-repeat" -- repeat unrepeatable commands
     use "tpope/vim-surround" -- classic surround plugin
     use "hrsh7th/cmp-nvim-lsp"
@@ -55,6 +56,7 @@ require("packer").startup(
       end
     }
     use "neovim/nvim-lspconfig" -- client for language servers
+    use "glepnir/lspsaga.nvim"
     use {
       "bkad/CamelCaseMotion", -- can jump between camel|snakecase words
       config = function()
@@ -95,6 +97,7 @@ require("packer").startup(
             topdelete = {hl = "DiffDelete", text = "‾", numhl = "GitSignsDeleteNr"},
             changedelete = {hl = "DiffChange", text = "~", numhl = "GitSignsChangeNr"}
           },
+
           numhl = false,
           keymaps = {
             -- Default keymap options
@@ -177,22 +180,13 @@ require("packer").startup(
         vim.g.nvim_tree_tab_open = 0
         vim.g.nvim_tree_allow_resize = 1
         vim.g.nvim_tree_show_icons = {
-          git = 1,
+          git = 0,
           folders = 1,
           files = 1
         }
         vim.g.nvim_tree_icons = {
           default = " ",
           symlink = " ",
-          git = {
-            unstaged = "✗",
-            staged = "✓",
-            unmerged = "",
-            renamed = "➜",
-            untracked = "★",
-            deleted = "",
-            ignored = "◌"
-          },
           folder = {
             default = "",
             open = "",
@@ -249,13 +243,21 @@ require("packer").startup(
             qflist_previewer = require "telescope.previewers".vim_buffer_qflist.new,
             -- Developer configurations: Not meant for general override
             buffer_previewer_maker = require "telescope.previewers".buffer_previewer_maker
-          }
+          },
+          pickers = {
+            find_files = {
+              theme = "dropdown",
+            },
+            live_grep = {
+              theme = "dropdown",
+            }
+          },
         }
       end
     }
   end
 )
-vim.api.nvim_command("colorscheme jellybeans-nvim")
+vim.api.nvim_command("colorscheme jellybeans")
 
 local cmp = require("cmp")
 cmp.setup {
@@ -286,6 +288,16 @@ cmp.setup {
         return vim_item
     end,
   },
+}
+
+local saga = require("lspsaga")
+saga.init_lsp_saga {
+  error_sign = '⬤',
+  warn_sign = '⬤',
+  hint_sign = '⬤',
+  infor_sign = '⬤',
+  rename_prompt_prefix = '',
+
 }
 
 require("opts")

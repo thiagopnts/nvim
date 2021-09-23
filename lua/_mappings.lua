@@ -80,3 +80,6 @@ vim.api.nvim_set_keymap("n", "<Leader>gs", ":Gstatus<cr>", {noremap = true, sile
 vim.api.nvim_set_keymap("n", "<Leader>j", ":diffget //3", {noremap = true, silent = true})
 -- git merge accept left
 vim.api.nvim_set_keymap("n", "<Leader>f", ":diffget //2", {noremap = true, silent = true})
+
+vim.api.nvim_set_keymap("n", "K", ":Lspsaga hover_doc", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<Leader>uw", ":Lspsaga lsp_finder<CR>", {noremap = true, silent = true})
