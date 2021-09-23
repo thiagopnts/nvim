@@ -302,4 +302,3 @@ saga.init_lsp_saga {
 require("opts")
 require("_mappings")
 require("_lspconfig")
-require("_formatter")
