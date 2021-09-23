@@ -43,21 +43,8 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    "documentation",
-    "detail",
-    "additionalTextEdits"
-  }
-}
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-local filetypes = {
-  typescript = "eslint",
-  typescriptreact = "eslint"
-  --  php = "psalm"
-}
 
 local linters = {
   eslint = {
@@ -141,9 +128,7 @@ local lsps = {
   rnix = {},
   diagnosticls = {
     on_attach = on_attach,
-    filetypes = vim.tbl_keys(filetypes),
     init_options = {
-      filetypes = filetypes,
       linters = linters,
       formatters = formatters,
       formatFiletypes = formatFiletypes

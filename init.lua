@@ -13,6 +13,7 @@ vim.api.nvim_exec(
   false
 )
 
+
 -- prepare to define plugins
 local use = require("packer").use
 require("packer").startup(
@@ -31,12 +32,20 @@ require("packer").startup(
     use "adisen99/jellybeans-nvim"
     use "tpope/vim-repeat" -- repeat unrepeatable commands
     use "tpope/vim-surround" -- classic surround plugin
-    use "hrsh7th/nvim-compe" -- auto completion plugin
+    use "hrsh7th/cmp-nvim-lsp"
+    use "hrsh7th/cmp-buffer"
+    use "hrsh7th/nvim-cmp"-- auto completion plugin
+    use "hrsh7th/cmp-vsnip"
     use "hrsh7th/vim-vsnip" -- snippets
-    use "hrsh7th/vim-vsnip-integ" -- vsnip integration for nvim-compe
+
     use "LnL7/vim-nix" -- nix syntax support
-    use "glepnir/galaxyline.nvim" -- status line
-    -- fancy & powerful grep lib
+    use {
+      "hoob3rt/lualine.nvim",
+      requires = {'kyazdani42/nvim-web-devicons', opt = true},
+      config = function ()
+        require("lualine").setup { options = { theme = 'jellybeans' } }
+      end
+    }
     -- Highlight, edit, and navigate code using a fast incremental parsing library
     use {
       "nvim-treesitter/nvim-treesitter",
@@ -54,9 +63,6 @@ require("packer").startup(
     }
     use {
       "onsails/lspkind-nvim",
-      config = function()
-        require("lspkind").init()
-      end
     }
     -- auto close pairs
     use {
@@ -249,12 +255,41 @@ require("packer").startup(
     }
   end
 )
-vim.api.nvim_command("colorscheme jellybeans")
+vim.api.nvim_command("colorscheme jellybeans-nvim")
+
+local cmp = require("cmp")
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      -- For `vsnip` user.
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
+    end,
+  },
+  mapping = {
+      ['<C-p>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-n>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.close(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'buffer' },
+    { name = 'vsnip' },
+  },
+  formatting = {
+    format = function(_, vim_item)
+        vim.cmd("packadd lspkind-nvim")
+        vim_item.kind = require("lspkind").presets.default[vim_item.kind]
+        .. "  "
+        .. vim_item.kind
+        return vim_item
+    end,
+  },
+}
 
 require("opts")
 require("_mappings")
-
 require("_lspconfig")
-require("_galaxyline")
-require("_compe")
+--require("_galaxyline")
 require("_formatter")

@@ -27,5 +27,5 @@ opt.ignorecase = true
 opt.scrolloff = 999 -- keep cursor centered
 opt.hlsearch = false
 
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = 'menu,menuone,noselect'
 vim.o.inccommand = 'nosplit'
