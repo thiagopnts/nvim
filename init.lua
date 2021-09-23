@@ -261,6 +261,9 @@ vim.api.nvim_command("colorscheme jellybeans")
 
 local cmp = require("cmp")
 cmp.setup {
+  documentation = {
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+  },
   snippet = {
     expand = function(args)
       -- For `vsnip` user.
