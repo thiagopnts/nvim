@@ -26,5 +26,6 @@ opt.termguicolors = true
 opt.ignorecase = true
 opt.scrolloff = 999 -- keep cursor centered
 opt.hlsearch = false
---opt.completeopt = "menuone,noselect"
-opt.completeopt = "longest,menuone"
+
+vim.o.completeopt = 'menuone,noselect'
+vim.o.inccommand = 'nosplit'

@@ -19,34 +19,23 @@ require("packer").startup(
   function()
     -- Package manager itself
     use "wbthomason/packer.nvim"
-    use "folke/lsp-colors.nvim"
-    use "ray-x/lsp_signature.nvim"
-    use "mhartington/formatter.nvim"
+    use "ray-x/lsp_signature.nvim" -- show function signature when you type
     use "cespare/vim-toml" -- toml syntax highlight
-    -- remove trailing whitespace
-    use "axelf4/vim-strip-trailing-whitespace"
-    -- for file icons
-    use "kyazdani42/nvim-web-devicons"
+    use "axelf4/vim-strip-trailing-whitespace" -- remove trailing whitespace
+    use "kyazdani42/nvim-web-devicons" -- for file icons
     use "tpope/vim-fugitive"
     use "christoomey/vim-tmux-navigator"
     use "nvim-treesitter/nvim-treesitter-textobjects"
     -- jellybeans colorscheme and its dependency lush
     use "rktjmp/lush.nvim"
     use "adisen99/jellybeans-nvim"
-    -- repeat unrepeatable commands
-    use "tpope/vim-repeat"
-    -- classic surround plugin
-    use "tpope/vim-surround"
-    -- auto completion plugin
-    use "hrsh7th/nvim-compe"
-    -- snippets
-    use "hrsh7th/vim-vsnip"
-    -- vsnip integration for nvim-compe
-    use "hrsh7th/vim-vsnip-integ"
-    -- nix syntax support
-    use "LnL7/vim-nix"
-    -- status line
-    use "glepnir/galaxyline.nvim"
+    use "tpope/vim-repeat" -- repeat unrepeatable commands
+    use "tpope/vim-surround" -- classic surround plugin
+    use "hrsh7th/nvim-compe" -- auto completion plugin
+    use "hrsh7th/vim-vsnip" -- snippets
+    use "hrsh7th/vim-vsnip-integ" -- vsnip integration for nvim-compe
+    use "LnL7/vim-nix" -- nix syntax support
+    use "glepnir/galaxyline.nvim" -- status line
     -- fancy & powerful grep lib
     -- Highlight, edit, and navigate code using a fast incremental parsing library
     use {
@@ -56,11 +45,9 @@ require("packer").startup(
         require "nvim-treesitter.configs".setup {highlight = {enable = true}}
       end
     }
-    -- client for language servers
-    use "neovim/nvim-lspconfig"
-    -- can jump between camel|snakecase words
+    use "neovim/nvim-lspconfig" -- client for language servers
     use {
-      "bkad/CamelCaseMotion",
+      "bkad/CamelCaseMotion", -- can jump between camel|snakecase words
       config = function()
         vim.g.camelcasemotion_key = ","
       end
@@ -85,16 +72,14 @@ require("packer").startup(
         require "go".setup {auto_lint = false}
       end
     }
-    -- rust lang support
     use {
-      "rust-lang/rust.vim",
+      "rust-lang/rust.vim", -- rust lang support
       config = function()
         vim.g.rustfmt_autosave = 1
       end
     }
-    -- git.... signs
     use {
-      "lewis6991/gitsigns.nvim",
+      "lewis6991/gitsigns.nvim", -- git.... signs
       config = function()
         require "gitsigns".setup {
           signs = {
@@ -125,9 +110,8 @@ require("packer").startup(
         }
       end
     }
-    -- top tabs bar
     use {
-      "akinsho/nvim-bufferline.lua",
+      "akinsho/nvim-bufferline.lua", -- top tabs bar
       config = function()
         require "bufferline".setup {
           options = {
@@ -145,7 +129,7 @@ require("packer").startup(
             view = "multiwindow",
             show_buffer_close_icons = true,
             separator_style = "thin",
-            mappings = "true"
+            --mappings = "true"
           }
         }
       end
@@ -162,6 +146,7 @@ require("packer").startup(
       "lukas-reineke/indent-blankline.nvim",
       config = function()
         vim.g.indentLine_enabled = 1
+--        vim.g.indent_blankline_char = "│"
         vim.g.indent_blankline_char = "▏"
         vim.g.indent_blankline_filetype_exclude = {"help", "terminal", "dashboard"}
         vim.g.indent_blankline_buftype_exclude = {"terminal"}
@@ -267,10 +252,9 @@ require("packer").startup(
 vim.api.nvim_command("colorscheme jellybeans")
 
 require("opts")
-require("mappings")
+require("_mappings")
 
 require("_lspconfig")
 require("_galaxyline")
 require("_compe")
 require("_formatter")
-require("_dashboard")
