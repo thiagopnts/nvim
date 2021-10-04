@@ -154,6 +154,9 @@ require("packer").startup(
     use {
       "lukas-reineke/indent-blankline.nvim",
       config = function()
+        require('indent_blankline').setup {
+          show_current_context = true,
+        }
         vim.g.indentLine_enabled = 1
 --        vim.g.indent_blankline_char = "│"
         vim.g.indent_blankline_char = "▏"
