@@ -47,6 +47,8 @@ vim.api.nvim_set_keymap("n", "<Leader>fn", [[<Cmd> DashboardNewFile<CR>]], {nore
 
 -- eval current lua file
 vim.api.nvim_set_keymap("n", "<Leader>rr", [[<Cmd> luafile %<CR>]], {noremap = true, silent = true})
+-- show current line git blame
+vim.api.nvim_set_keymap("n", "<Leader>gb", [[<Cmd> Gitsigns blame_line<CR>]], {noremap = true, silent = true})
 
 -- keep everything centered
 vim.api.nvim_set_keymap("n", "n", "nzzzv", {noremap = true, silent = true})
