@@ -32,6 +32,7 @@ require("packer").startup(
     use "rktjmp/lush.nvim"
     use "~/src/jellybeans"
     use "tpope/vim-repeat" -- repeat unrepeatable commands
+    use "hashivim/vim-terraform"
     use "tpope/vim-surround" -- classic surround plugin
     use "hrsh7th/cmp-nvim-lsp"
     use "hrsh7th/cmp-buffer"
@@ -40,6 +41,12 @@ require("packer").startup(
     use "hrsh7th/vim-vsnip" -- snippets
 
     use "LnL7/vim-nix" -- nix syntax support
+    use {
+      "APZelos/blamer.nvim",  -- show commit/blame current line
+      config = function ()
+        vim.g.blamer_enabled = 1
+      end
+    }
     use {
       "hoob3rt/lualine.nvim",
       requires = {'kyazdani42/nvim-web-devicons', opt = true},

@@ -120,6 +120,7 @@ if vim.fn.has("mac") == 1 then
 end
 
 local lsps = {
+  terraformls = {on_attach = on_attach, capabilities = capabilities},
   pylsp = {on_attach = on_attach, capabilities = capabilities},
   gopls = {on_attach = on_attach, capabilities = capabilities},
   rust_analyzer = {on_attach = on_attach, capabilities = capabilities},
