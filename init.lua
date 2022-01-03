@@ -20,11 +20,14 @@ require("packer").startup(
   function()
     -- Package manager itself
     use "wbthomason/packer.nvim"
+    use "github/copilot.vim"
     use "ray-x/lsp_signature.nvim" -- show function signature when you type
+    use "nvim-lua/lsp_extensions.nvim"
     use "cespare/vim-toml" -- toml syntax highlight
     use "axelf4/vim-strip-trailing-whitespace" -- remove trailing whitespace
     use "kyazdani42/nvim-web-devicons" -- for file icons
     use "tpope/vim-fugitive"
+    use "phaazon/hop.nvim"
     use "christoomey/vim-tmux-navigator"
     use "nvim-treesitter/nvim-treesitter-textobjects"
     -- jellybeans colorscheme and its dependency lush
@@ -87,12 +90,16 @@ require("packer").startup(
         require "go".setup {auto_lint = false}
       end
     }
-    use {
-      "rust-lang/rust.vim", -- rust lang support
-      config = function()
-        vim.g.rustfmt_autosave = 1
-      end
-    }
+    -- coc based ls settings
+    use {'neoclide/coc.nvim', branch = 'release'}
+-- lsp based rust settings
+   use "simrat39/rust-tools.nvim"
+--    use {
+--      "rust-lang/rust.vim", -- rust lang support
+--      config = function()
+--        vim.g.rustfmt_autosave = 1
+--      end
+--    }
     use {
       "lewis6991/gitsigns.nvim", -- git.... signs
       config = function()
@@ -178,18 +185,19 @@ require("packer").startup(
     use {
       "kyazdani42/nvim-tree.lua",
       config = function()
-        vim.g.nvim_tree_side = "left"
+        require("nvim-tree").setup {
+          nvim_tree_auto_open = 0,
+          nvim_tree_auto_close = 0,
+          nvim_tree_tab_open = 0,
+          nvim_tree_follow = 1,
+          nvim_tree_hide_dotfiles = 1,
+          nvim_tree_ignore = {".git", "node_modules", ".cache"},
+        }
         vim.g.nvim_tree_width = 25
-        vim.g.nvim_tree_ignore = {".git", "node_modules", ".cache"}
-        vim.g.nvim_tree_auto_open = 0
-        vim.g.nvim_tree_auto_close = 0
         vim.g.nvim_tree_quit_on_open = 0
-        vim.g.nvim_tree_follow = 1
         vim.g.nvim_tree_indent_markers = 1
-        vim.g.nvim_tree_hide_dotfiles = 1
         vim.g.nvim_tree_git_hl = 1
         vim.g.nvim_tree_root_folder_modifier = ":t"
-        vim.g.nvim_tree_tab_open = 0
         vim.g.nvim_tree_allow_resize = 1
         vim.g.nvim_tree_show_icons = {
           git = 0,
@@ -282,9 +290,29 @@ cmp.setup {
       vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
     end,
   },
+
   mapping = {
-      ['<C-p>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-n>'] = cmp.mapping.scroll_docs(4),
+      ['<Tab>'] = function(fallback)
+        if cmp.visible() then
+          cmp.mapping.confirm({ select = true })
+        else
+          fallback()
+        end
+      end,
+      ['<C-n>'] = function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        else
+          fallback()
+        end
+      end,
+      ['<C-p>'] = function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        else
+          fallback()
+        end
+      end,
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.close(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
@@ -313,6 +341,41 @@ saga.init_lsp_saga {
   infor_sign = '●',
   rename_prompt_prefix = '',
 }
+
+local rust_tools_opts = {
+    tools = { -- rust-tools options
+        autoSetHints = true,
+        hover_with_actions = true,
+        inlay_hints = {
+            show_parameter_hints = false,
+            parameter_hints_prefix = "",
+            other_hints_prefix = "",
+        },
+    },
+
+    -- all the opts to send to nvim-lspconfig
+    -- these override the defaults set by rust-tools.nvim
+    -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
+    server = {
+        -- on_attach is a callback called when the language server attachs to the buffer
+        -- on_attach = on_attach,
+        settings = {
+            -- to enable rust-analyzer settings visit:
+            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+            ["rust-analyzer"] = {
+                -- enable clippy on save
+                checkOnSave = {
+                    command = "clippy"
+                },
+            }
+        }
+    },
+}
+
+vim.g.rustfmt_autosave = 1
+require('rust-tools').setup(rust_tools_opts)
+
+require("hop").setup()
 
 require("opts")
 require("_mappings")

@@ -123,10 +123,24 @@ local lsps = {
   terraformls = {on_attach = on_attach, capabilities = capabilities},
   pylsp = {on_attach = on_attach, capabilities = capabilities},
   gopls = {on_attach = on_attach, capabilities = capabilities},
-  rust_analyzer = {on_attach = on_attach, capabilities = capabilities},
+  rust_analyzer = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+      ['rust-analyzer'] = {
+        checkOnSave = {
+          allFeatures = true,
+          overrideCommand = {
+              'cargo', 'clippy', '--workspace', '--message-format=json',
+              '--all-targets', '--all-features'
+          },
+        },
+      },
+    },
+  },
   phpactor = {on_attach = on_attach, capabilities = capabilities},
   bashls = {on_attach = on_attach, capabilities = capabilities},
-  rnix = {},
+  --rnix = {},
   diagnosticls = {
     on_attach = on_attach,
     init_options = {

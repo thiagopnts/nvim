@@ -16,6 +16,8 @@ vim.api.nvim_set_keymap("n", "J", "mzJ`z", {noremap = true, silent = true})
 -- undo break points
 --vim.api.nvim_set_keymap("i", ".", [[.<c-g>u]], {noremap = true, silent = true})
 
+vim.api.nvim_set_keymap("n", "<Leader>hw", [[<Cmd> HopWord<CR>]], {noremap = true, silent = true})
+
 -- open/close nvim tree
 vim.api.nvim_set_keymap("n", "<Leader>k", [[<Cmd> NvimTreeToggle<CR>]], {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<Leader>[", [[<Cmd> bp<CR>]], {noremap = true, silent = true})
