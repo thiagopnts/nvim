@@ -31,6 +31,7 @@ for opt, value in pairs({
   clipboard = "unnamedplus",
   guifont = "CaskaydiaCove Nerd Font:h16",
   laststatus = 3,
+  completeopt = { "menu", "menuone", "noselect" },
   list = true,
 }) do
   vim.opt[opt] = value
@@ -38,7 +39,3 @@ end
 
 vim.opt.listchars:append("eol:↴")
 vim.opt.listchars:append("tab:  ")
-
-vim.cmd "filetype plugin indent on"
-vim.cmd "syntax enable"
-vim.cmd "set termguicolors"
