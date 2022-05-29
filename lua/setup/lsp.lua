@@ -1,4 +1,18 @@
-require("nvim-lsp-installer").setup {
+local signs = { Error = "●", Warn = "●", Hint = "", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+require("lsp_signature").setup({
+  bind = true, -- This is mandatory, otherwise border config won't get registered.
+  hint_prefix = "",
+  handler_opts = {
+    border = "rounded",
+  },
+})
+
+require("nvim-lsp-installer").setup({
   automatic_installation = true,
   ui = {
     icons = {
@@ -7,7 +21,7 @@ require("nvim-lsp-installer").setup {
       server_uninstalled = "✗",
     },
   },
-}
+})
 
 local lsp_defaults = {
   flags = {
@@ -19,14 +33,13 @@ local lsp_defaults = {
   end,
 }
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-local null_ls = require "null-ls"
-null_ls.setup {
+local null_ls = require("null-ls")
+null_ls.setup({
   debug = true,
   sources = {
     null_ls.builtins.diagnostics.hadolint,
+    null_ls.builtins.formatting.xmllint,
     null_ls.builtins.formatting.black,
-    --null_ls.builtins.formatting.autopep8,
-
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.diagnostics.checkmake,
@@ -35,32 +48,30 @@ null_ls.setup {
   },
   -- you can reuse a shared lspconfig on_attach callback here
   on_attach = function(client, bufnr)
-    if client.supports_method "textDocument/formatting" then
-      vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+    if client.supports_method("textDocument/formatting") then
+      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = augroup,
         buffer = bufnr,
         callback = function()
-          vim.lsp.buf.format {
+          vim.lsp.buf.format({
             bufnr = bufnr,
-            --            filter = function(clients)
-            --              return vim.tbl_filter(
-            --                function(c) return c.name ~= "null-ls" end,
-            --                clients
-            --              )
-            --            end
-          }
+          })
         end,
       })
     end
   end,
-}
+})
 
-local lspconfig = require "lspconfig"
+local lspconfig = require("lspconfig")
 
 lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, lsp_defaults)
-require("rust-tools").setup {}
-require("go").setup {}
+require("rust-tools").setup({})
+require("go").setup({
+  lsp_cfg = {
+    capabilities = lsp_defaults.capabilities,
+  },
+})
 
 local lang_servers = {
   gopls = {},
@@ -68,7 +79,7 @@ local lang_servers = {
   terraformls = {},
   pyright = {},
   bashls = {},
-  sumneko_lua = require("lua-dev").setup {},
+  sumneko_lua = require("lua-dev").setup({}),
 }
 
 for lang_server, config in pairs(lang_servers) do
