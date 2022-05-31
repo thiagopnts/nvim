@@ -20,7 +20,7 @@ cmp.setup({
         nvim_lua = "[api]",
         luasnip = "[snip]",
       },
-      with_text = true,
+      --      with_text = true,
       mode = "symbol_text",
       maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
     }),

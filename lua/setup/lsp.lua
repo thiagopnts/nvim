@@ -66,12 +66,6 @@ null_ls.setup({
 local lspconfig = require("lspconfig")
 
 lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, lsp_defaults)
-require("rust-tools").setup({})
-require("go").setup({
-  lsp_cfg = {
-    capabilities = lsp_defaults.capabilities,
-  },
-})
 
 local lang_servers = {
   gopls = {},
@@ -85,3 +79,10 @@ local lang_servers = {
 for lang_server, config in pairs(lang_servers) do
   lspconfig[lang_server].setup(config)
 end
+
+require("rust-tools").setup({})
+require("go").setup({
+  lsp_cfg = {
+    capabilities = lsp_defaults.capabilities,
+  },
+})
