@@ -3,9 +3,9 @@ local luasnip = require("luasnip")
 require("luasnip.loaders.from_vscode").lazy_load()
 local cmp = require("cmp")
 cmp.setup({
-  experimental = {
-    ghost_text = true,
-  },
+  --  experimental = {
+  --    ghost_text = true,
+  --  },
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
