@@ -12,7 +12,7 @@ require("packer").startup(function(use)
   use("triglav/vim-visual-increment")
   use("github/copilot.vim")
   -- TODO: learn more about
-  use("nvim-treesitter/nvim-treesitter-textobjects")
+  --  use("nvim-treesitter/nvim-treesitter-textobjects")
   use("jose-elias-alvarez/null-ls.nvim")
   use("onsails/lspkind.nvim")
   use("axelf4/vim-strip-trailing-whitespace") -- remove trailing whitespace
@@ -37,7 +37,7 @@ require("packer").startup(function(use)
     "nvim-telescope/telescope.nvim",
     requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
   })
-  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+  --  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
   use({ "ray-x/guihua.lua", run = "cd lua/fzy && make" })
   use({
     "ray-x/go.nvim",
@@ -80,13 +80,6 @@ require("packer").startup(function(use)
           Function = { icon = "", hl = "TSFunction" },
         },
       }
-    end,
-  })
-  use({
-    "esensar/nvim-dev-container",
-    requires = { { "nvim-treesitter/nvim-treesitter" } },
-    config = function()
-      require("devcontainer").setup({})
     end,
   })
   use({
@@ -188,33 +181,33 @@ require("setup/telescope")
 --	rename_prompt_prefix = "",
 --})
 
-require("nvim-treesitter.configs").setup({
-  -- A list of parser names, or "all"
-  ensure_installed = { "c", "lua", "rust" },
-
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
-
-  -- List of parsers to ignore installing (for "all")
-  ignore_install = { "javascript" },
-
-  highlight = {
-    -- `false` will disable the whole extension
-    enable = true,
-
-    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-    -- the name of the parser)
-    -- list of language that will be disabled
-    disable = { "c", "rust" },
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-})
+--require("nvim-treesitter.configs").setup({
+--  -- A list of parser names, or "all"
+--  ensure_installed = { "c", "lua", "rust" },
+--
+--  -- Install parsers synchronously (only applied to `ensure_installed`)
+--  sync_install = false,
+--
+--  -- List of parsers to ignore installing (for "all")
+--  ignore_install = { "javascript" },
+--
+--  highlight = {
+--    -- `false` will disable the whole extension
+--    enable = true,
+--
+--    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+--    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+--    -- the name of the parser)
+--    -- list of language that will be disabled
+--    disable = { "c", "rust" },
+--
+--    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+--    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+--    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+--    -- Instead of true it can also be a list of languages
+--    additional_vim_regex_highlighting = false,
+--  },
+--})
 
 vim.cmd([[
   augroup packer_user_config
