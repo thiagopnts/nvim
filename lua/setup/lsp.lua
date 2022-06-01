@@ -80,6 +80,7 @@ end
 
 require("rust-tools").setup({})
 require("go").setup({
+  lsp_keymaps = false,
   lsp_cfg = {
     capabilities = lsp_defaults.capabilities,
   },
