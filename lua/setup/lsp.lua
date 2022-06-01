@@ -35,7 +35,6 @@ local lsp_defaults = {
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local null_ls = require("null-ls")
 null_ls.setup({
-  debug = true,
   sources = {
     null_ls.builtins.diagnostics.hadolint,
     null_ls.builtins.formatting.xmllint,
@@ -44,7 +43,6 @@ null_ls.setup({
     null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.diagnostics.checkmake,
     null_ls.builtins.diagnostics.fish,
-    null_ls.builtins.completion.spell,
   },
   -- you can reuse a shared lspconfig on_attach callback here
   on_attach = function(client, bufnr)
