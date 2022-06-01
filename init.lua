@@ -216,6 +216,8 @@ require("nvim-treesitter.configs").setup({
   },
 })
 
+vim.g.indent_blankline_show_current_context = true
+
 vim.cmd([[
   augroup packer_user_config
     autocmd!
