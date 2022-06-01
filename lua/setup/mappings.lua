@@ -2,6 +2,8 @@ vim.g.mapleader = " "
 -- when in terminal mode(:term), map ESC to exit instead of the default c-\ c-n
 vim.api.nvim_set_keymap("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
 
+vim.api.nvim_set_keymap("n", "<Leader>c", [[<Cmd>:Telescope commands<CR>]], { noremap = true, silent = true })
+
 -- show symbol outline
 vim.api.nvim_set_keymap("n", "<Leader>so", [[<Cmd>:SymbolsOutline<CR>]], { noremap = true, silent = true })
 
@@ -95,7 +97,7 @@ vim.api.nvim_set_keymap("n", "<Leader>ff", "<cmd>Telescope find_files<cr>", { no
 vim.api.nvim_set_keymap("n", "<Leader>b", ":Telescope buffers<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>ag", ":Telescope live_grep<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-]>", ":lua vim.lsp.buf.definition()<cr>", { noremap = true, silent = true })
---vim.api.nvim_set_keymap("n", "<Leader>e", ":lua vim.diagnostic.open_float()", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>e", ":lua vim.diagnostic.open_float()<cr>", { noremap = true, silent = true })
 -- git fugitive mappings
 vim.api.nvim_set_keymap("n", "<Leader>gs", ":Gstatus<cr>", { noremap = true, silent = true })
 -- git merge accept right
