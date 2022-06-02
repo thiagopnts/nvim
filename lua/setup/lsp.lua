@@ -40,6 +40,7 @@ null_ls.setup({
     null_ls.builtins.formatting.xmllint,
     null_ls.builtins.formatting.black,
     null_ls.builtins.formatting.stylua,
+    null_ls.builtins.formatting.zigfmt,
     null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.diagnostics.checkmake,
     null_ls.builtins.diagnostics.fish,
@@ -67,6 +68,7 @@ lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.defa
 
 local lang_servers = {
   gopls = {},
+  zls = {},
   dockerls = {},
   terraformls = {},
   pyright = {},
