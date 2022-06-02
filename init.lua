@@ -1,3 +1,7 @@
+-- TODO: we rely on a few binaries, add list here:
+-- - fzf
+-- - ripgrep
+-- - lazygit
 --local get_setup = function(name)
 --  return string.format 'require("setup/%s")', name
 --end
