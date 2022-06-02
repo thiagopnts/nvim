@@ -38,6 +38,7 @@ require("packer").startup(function(use)
   use("folke/tokyonight.nvim")
   use({ "akinsho/toggleterm.nvim", tag = 'v1.*' })
   use({ "nvim-telescope/telescope-fzy-native.nvim", run = "make" })
+  use({ 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' })
   use({
     "nvim-telescope/telescope.nvim",
     requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
