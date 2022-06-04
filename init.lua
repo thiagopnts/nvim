@@ -36,9 +36,9 @@ require("packer").startup(function(use)
   -- colorschemes
   use("rebelot/kanagawa.nvim")
   use("folke/tokyonight.nvim")
-  use({ "akinsho/toggleterm.nvim", tag = 'v1.*' })
+  --  use({ "akinsho/toggleterm.nvim", tag = "v1.*" })
   use({ "nvim-telescope/telescope-fzy-native.nvim", run = "make" })
-  use({ 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' })
+  --use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
   use({
     "nvim-telescope/telescope.nvim",
     requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
@@ -184,7 +184,7 @@ require("setup/mappings")
 require("setup/cmp")
 require("setup/lsp")
 require("setup/telescope")
-require("setup/toggleterm")
+--require("setup/toggleterm")
 
 --local saga = require("lspsaga")
 --saga.init_lsp_saga({
