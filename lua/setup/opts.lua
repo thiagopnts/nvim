@@ -4,7 +4,7 @@
 -- ended up setting the same option multiple times
 -- as we're trying/setting/experimenting things in a hurry,
 -- with this we get a warning in our faces.
-for opt, value in pairs {
+for opt, value in pairs({
   compatible = false,
   tabstop = 2,
   shiftwidth = 2,
@@ -34,9 +34,10 @@ for opt, value in pairs {
   laststatus = 3,
   completeopt = { "menu", "menuone", "noselect" },
   list = true,
-} do
+  cmdheight = 0,
+}) do
   vim.opt[opt] = value
 end
 
-vim.opt.listchars:append "eol:↴"
-vim.opt.listchars:append "tab:  "
+vim.opt.listchars:append("eol:↴")
+vim.opt.listchars:append("tab:  ")
