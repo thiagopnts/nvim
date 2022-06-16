@@ -44,6 +44,7 @@ require("packer").startup(function(use)
     requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
   })
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+  use("nvim-treesitter/nvim-treesitter-context")
   use({ "ray-x/guihua.lua", run = "cd lua/fzy && make" })
   use({
     "ray-x/go.nvim",
@@ -222,6 +223,7 @@ require("nvim-treesitter.configs").setup({
     additional_vim_regex_highlighting = false,
   },
 })
+require("treesitter-context").setup()
 
 vim.g.indent_blankline_show_current_context = true
 
