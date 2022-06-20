@@ -30,20 +30,29 @@ local lsp_defaults = {
   capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
   on_attach = function(client, bufnr)
     vim.api.nvim_exec_autocmds("User", { pattern = "LspAttached" })
+    if client.resolved_capabilities.document_formatting then
+      vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.format()")
+    end
   end,
 }
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
-    null_ls.builtins.diagnostics.hadolint,
+    null_ls.builtins.formatting.shfmt,
+    null_ls.builtins.formatting.rubocop,
     null_ls.builtins.formatting.xmllint,
     null_ls.builtins.formatting.black,
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.zigfmt,
+    null_ls.builtins.formatting.prettier,
+
+    null_ls.builtins.diagnostics.hadolint,
     null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.diagnostics.checkmake,
     null_ls.builtins.diagnostics.fish,
+
+    null_ls.builtins.code_actions.eslint,
   },
   -- you can reuse a shared lspconfig on_attach callback here
   on_attach = function(client, bufnr)
@@ -73,17 +82,40 @@ local lang_servers = {
   terraformls = {},
   pyright = {},
   bashls = {},
-  sumneko_lua = require("lua-dev").setup({}),
+  solargraph = {},
+  sumneko_lua = require("lua-dev").setup({
+    lspconfig = {
+      on_attach = function(client, bufnr)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+      end,
+    },
+  }),
 }
 
 for lang_server, config in pairs(lang_servers) do
   lspconfig[lang_server].setup(config)
 end
 
+lspconfig.tsserver.setup({
+  on_attach = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+    local ts_utils = require("nvim-lsp-ts-utils")
+    ts_utils.setup({})
+    ts_utils.setup_client(client)
+    lsp_defaults.on_attach(client, bufnr)
+  end,
+})
+
 require("rust-tools").setup({})
 require("go").setup({
   lsp_keymaps = false,
   lsp_cfg = {
     capabilities = lsp_defaults.capabilities,
+    on_attach = function(client, bufnr)
+      lsp_defaults.on_attach(client, bufnr)
+      navic.attach(client, bufnr)
+    end,
   },
 })
