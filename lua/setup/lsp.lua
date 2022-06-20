@@ -115,7 +115,6 @@ require("go").setup({
     capabilities = lsp_defaults.capabilities,
     on_attach = function(client, bufnr)
       lsp_defaults.on_attach(client, bufnr)
-      navic.attach(client, bufnr)
     end,
   },
 })

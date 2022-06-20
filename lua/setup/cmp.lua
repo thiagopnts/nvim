@@ -4,7 +4,9 @@ require("luasnip.loaders.from_vscode").lazy_load()
 local cmp = require("cmp")
 cmp.setup({
   experimental = {
-    ghost_text = true,
+    -- setting this to false because it can be annoying
+    -- while using with copilot
+    ghost_text = false,
   },
   snippet = {
     expand = function(args)
